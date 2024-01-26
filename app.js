@@ -24,15 +24,21 @@ var budgetController = (function () {
 
     return {
         addItem: function (type, des, val) {
-            var newItem;
-            var id = 0;
+            var newItem, id;
 
+            //create new ID
+            id = data.allItems[type][data.allItems[type].length - 1].id + 1;
+
+            // create new item based on 'inc' or 'exp'
             if (type === 'exp') {
                 newItem = new Expense(id, des, val);
             } else if (type === 'inc') {
                 newItem = new Income(id, des, val);
             }
+            // push it into data structure
             data.allItems[type].push(newItem);
+
+            //return the new item
             return newItem;
         }
     };
@@ -81,8 +87,11 @@ var controller = (function (budgetCtrl, UICtrl) {
 
     };
     var ctrlAddItem = function () {
-        var input = UICtrl.getInput();
-        console.log(input);
+        var input, newItem;
+
+        input = UICtrl.getInput();
+
+        newItem = budgetCtrl.addItem(input.type, input.description, input.value);
     }
     return {
         init: function () {
