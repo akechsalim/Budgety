@@ -106,6 +106,17 @@ var UIController = (function () {
             document.querySelector(element).insertAdjacentHTML('beforeend', newHTML);
 
         },
+        clearFields: function () {
+            var fields, fieldsArray;
+
+            fields = document.querySelectorAll(DOMStrings.inputDescription + ',' + DOMStrings.inputValue);
+            fieldsArray = Array.prototype.slice.call(fields);
+
+            fieldsArray.forEach(function (current, index, array) {
+                current.value = "";
+            })
+            fieldsArray[0].focus();
+        },
         getDOMStrings: function () {
             return DOMStrings;
         }
@@ -122,12 +133,12 @@ var controller = (function (budgetCtrl, UICtrl) {
         document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
 
         document.addEventListener('keypress', function (event) {
-            if (event.which === 13) {
-                ctrlAddItem();
-            }
-        });
+            ctrlAddItem();
+        }
+    });
 
-    };
+};
+            if (event.which === 13) {
     var ctrlAddItem = function () {
         var input, newItem;
 
@@ -139,6 +150,8 @@ var controller = (function (budgetCtrl, UICtrl) {
 
         //3. Add Item to the UI
         UICtrl.addListItem(newItem, input.type);
+        //4. Clear the fields
+        UICtrl.clearFields();
 
     };
 
