@@ -71,11 +71,11 @@ body {
 
 .budget__income {
     margin-bottom: 10px;
-    background-color: #28B9B5;
+    background-color: #51e110;
 }
 
 .budget__expenses {
-    background-color: #FF5049;
+    background-color: #ff1919;
 }
 
 .budget__income--text,
